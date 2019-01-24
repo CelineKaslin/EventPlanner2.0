@@ -1,17 +1,15 @@
 describe('EventCalendar', function() {
 
   let eventCalendar = new EventCalendar()
-  let eventPlannerContent = "content"
-  let eventPlannerDate = "21/11/2019"
-  let eventPlanner = eventPlannerContent + ' ' + eventPlannerDate
+  let fakeEvent = {getDateObject: () => Date.parse("21/11/2019")}
+
 
   it('eventCalendar is an instance of Event Calendar class', function() {
     instanceOf(eventCalendar, EventCalendar);
   });
 
-  it('eventCalendar is able to show list of the events', function() {
-    eventCalendar.pushEvent(eventPlanner)
-    expectToEqual(eventPlanner, eventCalendar.displayEvent());
-  }); //test to be revisited
-
+  it('eventCalendar can store an event', function() {
+    eventCalendar.pushEvent(fakeEvent)
+    expectToEqual(eventCalendar._eventList[0], fakeEvent);
+  });
 });

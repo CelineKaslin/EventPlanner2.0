@@ -25,6 +25,6 @@ class EventCalendar {
       let eventHTML = e.displayAnEvent();
       div.appendChild(eventHTML);
     })
-    return div
+    return div;
   }
 }
