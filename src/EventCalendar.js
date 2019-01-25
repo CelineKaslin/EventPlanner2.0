@@ -1,7 +1,6 @@
 class EventCalendar {
-  constructor(now = new Date, eventList = null) {
+  constructor(eventList = null) {
     this._eventList = this.inStorage()
-    this._now = now
   }
 
   pushEvent(event) {
@@ -23,9 +22,9 @@ class EventCalendar {
 
   upComingEvents(){
     let upcoming = [];
+    let now = new Date;
     let eventsArray = this.inflatedObjects(JSON.parse(localStorage.getItem('events')))
     eventsArray.forEach((event) => {
-      let now = this._now;
       let eventDate = event.getDateObject();
       if (eventDate > now) {
         upcoming.push(event);
@@ -39,16 +38,10 @@ class EventCalendar {
       result = this.upComingEvents().sort(function(a, b) {
       let date1 = a.getDateObject();
       let date2 = b.getDateObject();
-      if (date1 < date2) {
-        return -1;
-      }
-      if (date2 < date1) {
-        return 1;
-      }
-      return 0;
-    })
-    return result;
-  }
+      return date1 - date2
+      })
+      return result.reverse()
+    }
 
   displayEvent(){
     let div = document.createElement('div');
