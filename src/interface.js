@@ -1,17 +1,26 @@
-window.addEventListener('load', ()=> {
+window.onload = function() {
 
   let calendar = new EventCalendar();
-  let button = document.getElementById('event_create_button')
+  // let button = document.getElementById('event_create_button')
+  var eventi = document.querySelector(".Events")
+  var button = document.querySelector(".Createevent")
 
   if (!localStorage.getItem('events')){
-    events.innerText = "No events, please add one!"
+    eventi.innerText = "No events, please add one!"
   } else {
-    events.innerText = eventBoard.displayEvents()
+    eventi.innerText = calendar.displayEvent()
   }
-  
-  button.addEventListener('click', ()=> {
+
+  button.onclick = () => {
     makeEvent();
-  });
+  }
+
+  // id="event_create_button" 
+  // id="eventlistings"
+  
+  // button.addEventListener('click', ()=> {
+  //   makeEvent();
+  // });
   
   //creates event & push to a calendar
   function makeEvent() {
@@ -23,10 +32,15 @@ window.addEventListener('load', ()=> {
   }
   
     const displayEvent = ()=> {
-      let eventlistings = document.getElementById('eventlistings');
+      // let eventlistings = document.getElementById('eventlistings');
       events = calendar.displayEvent();
-      eventlistings.innerText = " ";
-      eventlistings.appendChild(events);
+      eventi.innerText = " ";
+      eventi.appendChild(events);
     }
+}
+
+// window.addEventListener('load', ()=> {
+
   
-  })
+  
+//   })
