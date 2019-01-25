@@ -1,16 +1,30 @@
 class EventCalendar {
   constructor(now = new Date, eventList = null) {
-    this._eventList = [];
+    this._eventList = this.inStorage()
     this._now = now
   }
 
   pushEvent(event) {
     this._eventList.push(event);
+    localStorage.setItem('events', JSON.stringify(this._eventList))
+  }
+
+  inStorage() {
+    if(!localStorage.getItem('events')) {
+      return []
+    } else {
+      return this.inflatedObjects(JSON.parse(localStorage.getItem('events')))
+    }
+  }
+
+  getEvents() {
+    return this._eventList
   }
 
   upComingEvents(){
     let upcoming = [];
-    this._eventList.forEach((event) => {
+    let eventsArray = this.inflatedObjects(JSON.parse(localStorage.getItem('events')))
+    eventsArray.forEach((event) => {
       let now = this._now;
       let eventDate = event.getDateObject();
       if (eventDate > now) {
@@ -43,5 +57,14 @@ class EventCalendar {
       div.appendChild(eventHTML);
     })
     return div;
+  }
+
+  inflatedObjects(flattenedObject) {
+    let temporaryArray = [];
+    flattenedObject.forEach(function(event) {
+      let newObject = new EventPlanner(event._content, event._date)
+      temporaryArray.push(newObject)
+    })
+    return temporaryArray;
   }
 }
