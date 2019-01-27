@@ -42,8 +42,3 @@ In order for others to use the app, it should be deployed.
 * Marble Testing Framework - Testing framework built in pair programming by:
 [Emanuele Gorga][website] and Adam Lodowski.
 
-## :scroll: License
-
-© [Emanuele Gorga][website]
-
-[website]: https://www.linkedin.com/in/emanuele-gorga-18a6a585/
